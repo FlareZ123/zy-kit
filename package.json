@@ -1,0 +1,11 @@
+{
+    "name": "zy-kit",
+    "version": "1.0.0",
+    "description": "General use utilities library. Swiss army knife for Node.js scripting.",
+    "license": "MIT",
+    "repository": "FlareZ123/zy-kit",
+    "main": "index.js",
+    "keywords": [
+      "toolkit"
+    ]
+}
