@@ -15,7 +15,7 @@ Array.prototype.randomFlush = function (identifier) {
     };
     usedCache.add(random);
     return random;
-};
+}; //one wrong move and kaboom
 
 Object.defineProperty(Array.prototype, "splitTo", {
     value: function (size) {
@@ -46,6 +46,79 @@ let chunkString = function(s, n = sliceSize) {
     }
 };
 
+//this is actually useful
+function memoize(fn) {
+    let cache = {};
+    return function(...args) {
+      let key = JSON.stringify(args);
+      if (key in cache) {
+        return cache[key];
+      } else {
+        let result = fn(...args);
+        cache[key] = result;
+        return result;
+      }
+    };
+};
+
+
+// String.prototype.capitalize() method
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+// Number.prototype.clamp() method
+Number.prototype.clamp = function(min, max) {
+  return Math.min(Math.max(this, min), max);
+};
+
+// Function.prototype.before() method
+Function.prototype.before = function(beforeFn) {
+  return (...args) => {
+    beforeFn();
+    return this(...args);
+  };
+};
+
+// Function.prototype.after() method
+Function.prototype.after = function(afterFn) {
+  return (...args) => {
+    let result = this(...args);
+    afterFn();
+    return result;
+  };
+};
+
+// Removes duplicates from an array
+Array.prototype.unique = function() {
+    return [...new Set(this)];
+};
+
+// Returns the last item in an array
+Array.prototype.last = function() {
+    return this[this.length - 1];
+};
+
+// Removes an item from an array by value
+Array.prototype.remove = function(value) {
+  const index = this.indexOf(value);
+  if (index !== -1) {
+    this.splice(index, 1);
+  }
+  return this;
+};
+
+// Returns the sum of all values in an array of numbers
+Array.prototype.sum = function() {
+  return this.reduce((sum, value) => sum + value, 0);
+};
+
+// Returns the average of all values in an array of numbers
+Array.prototype.average = function() {
+  return this.sum() / this.length;
+};
+
 module.exports = {
-   chunkString: chunkString
+   chunkString,
+   memoize
 };
